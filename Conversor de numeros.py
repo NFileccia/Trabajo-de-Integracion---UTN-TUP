@@ -20,44 +20,55 @@ while True:
                 if numero_decimal_str.isdigit():
                     numero_decimal = int(numero_decimal_str)
 
+                    # Conversión de Decimal a Binario
+                    binario = ""
+                    numero = numero_decimal
 
-                # Aquí irá el código para la conversión de Decimal a Binario
+                    if numero == 0:
+                        binario = "0"
+                    else:
+                        while numero > 0:
+                            resto = numero % 2       # Calcula el resto de dividir por 2
+                            binario = str(resto) + binario  # Lo agrega al principio
+                            numero = numero // 2     # División entera por 2
 
-
-
-                    print(f"Número decimal ingresado: {numero_decimal}")
-                # Código de conversión...
-                    break # Salir del bucle de validación
+                    print(f"Equivalente en binario: {binario}")
+                    break  # Salir del bucle de validación
                 else:
                     print("Entrada inválida. Por favor, ingresa solo dígitos.")
 
         case "2":
             print("\n--- Conversión: Binario a Decimal ---")
-        
+            # Para binario a decimal: recorrer el número binario de derecha a izquierda, multiplicando cada dígito por 2^posición.
+
             while True:
                 numero_binario_str = input("Ingresa un número binario (solo 0s y 1s): ")
             
-            # Validación de entrada binaria
-                es_valido = True
+                valido = True
+                # Recorrido y validación del número binario
+
+                if not numero_binario_str.isdigit():
+                    valido = False
+                    
                 for digito in numero_binario_str:
-                    if digito not in ('0', '1'):
-                        es_valido = False
+                    if digito not in ("0", "1"):
+                        valido = False
                         break
-                if es_valido:
 
+                # Conversión de numero Binario a Decimal
+                if valido:
+                    decimal = 0 # acumulador para el resultado en base 10
+                    potencia = 0 # posición del digito (empezamos en la derecha)
 
-
-                    # Aquí irá el código para la conversión de Binario a Decimal
-
-
-
-
-
-                    print(f"Número binario ingresado: {numero_binario_str}")
-                # Código de conversión...
-                    break # Salir del bucle de validación
+                    for digito in numero_binario_str[::-1]: # Recorre los digitos del numero binario a la inversa
+                        decimal += int(digito) * (2 ** potencia)
+                        # convertimos el carácter ('0' o '1') a número entero
+                        # multiplicamos por 2^potencia y lo sumamos al acumulador
+                        potencia += 1 # Aumentamos la potencia de 2 para el siguiente digito
+                    print("El decimal es:", decimal)
+                    break
                 else:
-                    print("Entrada inválida. Por favor, ingresa solo 0s y 1s.")
+                    print("Error: El número ingresado no es binario válido.")
 
         case "3":
             print("Saliendo del programa. ¡Hasta luego!")
